@@ -151,6 +151,6 @@ class ProductControllerIntegrationTest {
 
         mockMvc.perform(get("/products/cicd"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data", is("Your Service has been deployed...")));
+                .andExpect(jsonPath("$.data", is("Your Service has been deployed..")));
     }
 }
