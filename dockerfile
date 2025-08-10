@@ -25,6 +25,9 @@ WORKDIR /app
 # Copy the jar from the build stage
 COPY --from=build /app/target/product-catalog-1.0.jar app.jar
 
+# Copy buildspec-integration.yaml to container root
+COPY buildspec-integration.yaml /buildspec-integration.yaml
+
 # Expose the default Spring Boot port
 EXPOSE 8080
 
