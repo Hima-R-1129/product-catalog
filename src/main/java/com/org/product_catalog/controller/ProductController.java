@@ -134,4 +134,9 @@ public class ProductController {
             throw e;
         }
     }
+
+    @GetMapping("/cicd")
+    public ResponseEntity<ApiResponseModel<String>> checkforCICD(){
+        return ResponseEntity.ok(ApiResponseModel.success("","Your Service has been deployed"));
+    }
 }
