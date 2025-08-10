@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.org</groupId>
 	<artifactId>product-catalog</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>product-catalog</name>
 	<description>Backend service for a hypothetical product catalog system</description>
 	<url />

@@ -9,7 +9,7 @@
         - REPOSITORY_URI=387158738266.dkr.ecr.us-east-2.amazonaws.com/product-catalog
         - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $REPOSITORY_URI
         - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-        - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+        - IMAGE_TAG=$COMMIT_HASH
     build:
       commands:
         - echo Build started on `date`
@@ -23,16 +23,16 @@
         - docker push $REPOSITORY_URI:latest
         - docker push $REPOSITORY_URI:$IMAGE_TAG
         - echo Writing image definitions file...
-        - printf '[{"name":"course-service","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-        - echo Writing image definitions file...
         # add your container name
         - DOCKER_CONTAINER_NAME=product-catalog
         - printf '[{"name":"%s","imageUri":"%s"}]' $DOCKER_CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
         - echo $DOCKER_CONTAINER_NAME
         - echo printing imagedefinitions.json
         - cat imagedefinitions.json
+        - $IMAGE_TAG > imageDetail.txt
 
   artifacts:
     files:
       - imagedefinitions.json
-      - target/course-service.jar
+      - imageDetail.txt
+      - target/product-catalog-1.0.jar
