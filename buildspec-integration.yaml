@@ -3,17 +3,13 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo "Reading image tag from previous stage..."
-      - IMAGE_TAG=$(cat imageDetail.txt)
-      - echo "Image tag: $IMAGE_TAG"
-      - REPOSITORY_URI=387158738266.dkr.ecr.us-east-2.amazonaws.com/product-catalog
       - echo "Logging in to Amazon ECR..."
+      - REPOSITORY_URI=387158738266.dkr.ecr.us-east-2.amazonaws.com/product-catalog
       - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $REPOSITORY_URI
   build:
     commands:
       - echo "Starting container for integration tests..."
-      - docker run -d --name product-catalog -p 8080:8080 $REPOSITORY_URI:$IMAGE_TAG
-      - echo "Waiting for application to start..."
+      - docker run -d --name product-catalog -p 8080:8080 $REPOSITORY_URI:latest
       - sleep 20
       - echo "Running integration tests..."
       - mvn verify -Pintegration-tests
