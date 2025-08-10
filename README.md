@@ -7,8 +7,7 @@ A simple product catalog backend built with Spring Boot and H2 database. Provide
 - Search by name or category: `GET /products/search?query=` (searches name and category)
 - Health check: `GET /health`
 - H2 in-memory database (persistent file optional)
-- Dockerfile and GitHub Actions pipeline
-- Kubernetes manifests (optional)
+- Dockerfile and AWS CodeBuild/CodePipeline integration
 
 ## API Endpoints
 - `GET /products` - list all products
@@ -40,7 +39,8 @@ Requirements: Java 17+, Maven
 mvn clean package -DskipTests
 
 # run
-java -jar target/product-catalog-0.0.1-SNAPSHOT.jar
+java -jar target/product-catalog-1.0.jar
+
 ```
 
 App runs on port 8080 by default. H2 console available at `http://localhost:8080/h2-console` (jdbc url: `jdbc:h2:mem:productdb`).
@@ -54,12 +54,5 @@ docker build -t product-catalog:latest .
 docker run -p 8080:8080 product-catalog:latest
 ```
 
-## CI (GitHub Actions)
-Included workflow `./github/workflows/ci.yml` builds, tests, and builds Docker image (container build) — adjust publish step to push to your registry.
-
-## Deploy (manual)
-1. Build and push Docker image to your container registry.
-2. Apply Kubernetes manifests in `k8s/` or deploy to your chosen cloud (ECS/AKS/etc.)
-
 ## Notes
-- This project uses H2 in-memory DB for simplicity. Switch to Postgres by updating `application.properties` and dependencies.
+- This project uses H2 in-memory DB for simplicity. We can switch to Postgres by updating `application.properties` and dependencies.

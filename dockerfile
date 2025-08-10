@@ -23,7 +23,7 @@ FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 
 # Copy the jar from the build stage
-COPY --from=build /app/target/product-catalog-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /app/target/product-catalog-1.0.jar app.jar
 
 # Expose the default Spring Boot port
 EXPOSE 8080
