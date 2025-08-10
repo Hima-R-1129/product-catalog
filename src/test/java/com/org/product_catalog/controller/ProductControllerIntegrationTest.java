@@ -148,6 +148,7 @@ class ProductControllerIntegrationTest {
 
     @Test
     void testCheckForCICD() throws Exception {
+
         mockMvc.perform(get("/products/cicd"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data", is("Your Service has been deployed...")));
