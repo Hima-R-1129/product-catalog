@@ -29,7 +29,7 @@
         - echo $DOCKER_CONTAINER_NAME
         - echo printing imagedefinitions.json
         - cat imagedefinitions.json
-        - $IMAGE_TAG > imageDetail.txt
+        - echo "$IMAGE_TAG" > imageDetail.txt
 
   artifacts:
     files:
